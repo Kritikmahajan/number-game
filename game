@@ -1,61 +1,52 @@
+
 #include<iostream>
-#include<vector>
+#include<bits/stdc++.h>
 using namespace std;
-class Options{
-    protected:
-        int n,elem,i;
-        vector<int> vec;
+class Guess{
+    int n,i,num;
 
     public:
-       void options(){
-            cout<<endl<<"Choose an option "<<endl;
-            cout<<"1. Add an element. "<<endl;
-            cout<<"2. Delete an element. "<<endl;
-            cout<<"3. Return stack. "<<endl;
-            cout<<"4. Exit. "<<endl;
-            cin>>n;
+        Guess(){
+            srand(time(0));
+            n=1+rand()%100;
+            cout<<endl<<"Enter a number between 1 and 100 "<<endl;
+            cin>>num;
+        }
+        void number();
+};
+void Guess ::number(){
+    for (i=4;i>=0;i--){
+        if (num==n){
+            cout<<endl<<"You guess the right number. ";
+            break;
+        }
+        else if (i==0 &&num!=n){
+            cout<<endl<<"You lost the game. ";
+
+        }
+        else if (num>n){
+            cout<<"The entered number is larger."<<endl;
+            cout<<endl<<"You left with "<<i<<" chances. "<<endl;
+            cout<<"Enter : ";
+            cin>>num;
+
+        }
+        else if (num<n){
+            cout<<"The entered number is smaller."<<endl;
+            cout<<endl<<" You left with "<<i<<" chances. "<<endl;
+            cout<<"Enter : ";
+            cin>>num;
+        }
+        
+
 
     }
-};
-class Working :public Options{
-    public:
-        void work();
-
-        
-        void one(){
-            cout<<"enter element to add :"<<endl;
-            cin>>elem;
-            vec.push_back(elem);
-        }
-        void two(){
-            if (vec.size()==0)cout<<"stack is empty. "<<endl;
-            else vec.pop_back();
-        }
-        void three ();
-        
-
-};
-void Working :: three(){
-    cout<<endl<<endl;
-    for (i=0;i<vec.size();i++){
-        cout<<vec[i]<<" ";
-    }
-    cout<<endl<<endl<<endl;
 
 }
-void Working:: work(){
-    n=6;
-    while(n!=4){
-        options();
-        if (n==1)one();
-        else if (n==2)two();
-        else if (n==3)three();
-        else if (n==4)break;
-        else cout<<"enter valid option. "<<endl;
-    }
-}
+
 int main(){
-    Working obj;
-    obj.work();
+    Guess obj;
+    obj.number();
     return 0;
+    
 }
